@@ -12,19 +12,19 @@ Gem::Specification.new do |s|
   s.description = %q{Based on Kramdown, a convert object .to_confluence}
 
   s.required_rubygems_version = ">= 1.3.6"
-  s.required_ruby_version = '>= 1.9.3'
+  s.required_ruby_version = '>= 3.1.0'
   s.rubyforge_project         = "markdown2confluence"
 
   s.add_dependency "kramdown"
   s.add_dependency "nokogiri"
   
-  s.add_development_dependency('rake', "~> 0.9.2")
-  s.add_development_dependency('activesupport', '>= 3.0.0')
-  s.add_development_dependency('turn')
+  s.add_development_dependency('rake', '>= 13.0.6')
+  s.add_development_dependency('minitest', '>= 5.17.0')
+  s.add_development_dependency('activesupport', '~> 6.0.0')
 
   s.files        = `git ls-files`.split("\n")
   s.executables  = `git ls-files`.split("\n").map{|f| f =~ /^bin\/(.*)/ ? $1 : nil}.compact
   s.require_path = 'lib'
-  s.test_files = s.files.select { |path| path =~ /^test\/test_.*\.rb/ }
+  s.test_files = s.files.select { |path| path =~ /^test\/.*_test\.rb/ }
 end
 

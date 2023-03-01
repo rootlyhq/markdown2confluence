@@ -84,7 +84,15 @@ module Kramdown
       end
 
       def convert_text(el, indent)
-        el.value
+        if el.value.match?(/~~.*~~/)
+          convert_strikethrough(el, indent)
+        else
+          el.value
+        end
+      end
+
+      def convert_strikethrough(el, indent)
+        el.value.gsub(/~~/, '-')
       end
 
       def convert_p(el, indent)

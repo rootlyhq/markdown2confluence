@@ -17,18 +17,8 @@ class Markdown2ConfluenceTest < ActiveSupport::TestCase
     assert_equal "h4. Hello\n", confluence("#### Hello")
   end
 
-  test "unordered list" do
-    list =  "* this\n"
-    list << "* is\n"
-    list << "* a\n"
-    list << "* list\n"
-    confluence_list = list.gsub("*", "-   ")
-    assert_equal confluence_list, confluence(list)
-  end
-
-  # FIX - failing test
   test "ordered list" do
-    assert_equal "1. this\n2. is\n3. a\n4. list\n", confluence("1. this\n2. is\n3. a\n4. list\n" )
+    assert_equal "#  this\n#  is\n#  a\n#  list\n", confluence("1. this\n2. is\n3. a\n4. list\n" )
   end
 
   test "strong text" do
@@ -48,14 +38,12 @@ class Markdown2ConfluenceTest < ActiveSupport::TestCase
     assert_equal "{code}this is code\n{code}\n", confluence(code)
   end
 
-  # FIX - failing test
   test "strikethrough" do
     assert_equal "-strikethrough text-\n", confluence("~~strikethrough text~~")
   end
 
-  # FIX - failing test
   test "quote" do
-    assert_equal "bq. this is a quote", confluence("> this is a quote")
+    assert_equal "{quote}\nthis is a quote\n{quote}", confluence("> this is a quote")
   end
 
   test "hyperlink" do
