@@ -84,8 +84,10 @@ module Kramdown
       end
 
       def convert_text(el, indent)
-        if el.value.match?(/~~.*~~/)
+        if el.value.match?(/~~.*~~/) # Is strikethrough?
           convert_strikethrough(el, indent)
+        elsif el.value.match?(/\{.*\}/) # Is macro?
+          convert_macro(el, indent)
         else
           el.value
         end
@@ -93,6 +95,10 @@ module Kramdown
 
       def convert_strikethrough(el, indent)
         el.value.gsub(/~~/, '-')
+      end
+
+      def convert_macro(el, indent)
+        el.value.gsub(/\{/, '\{').gsub(/\}/, '\}')
       end
 
       def convert_p(el, indent)

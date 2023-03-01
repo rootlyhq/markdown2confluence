@@ -46,6 +46,10 @@ class Markdown2ConfluenceTest < ActiveSupport::TestCase
     assert_equal "{quote}\nthis is a quote\n{quote}", confluence("> this is a quote")
   end
 
+  test "escaping macro" do
+    assert_equal "\\{hello world\\}\n", confluence("{hello world}")
+  end
+
   test "hyperlink" do
     assert_equal "[github|http://github.com]\n", confluence("[github](http://github.com)")
   end
